@@ -29,8 +29,8 @@
     ],
 'assets': {
         'point_of_sale.assets': [
-            'bi_pos_product_toppings/static/src/js/CustomerReferenceField.js',
-            'bi_pos_product_toppings/static/src/xml/pos.xml',
+            'bi_pos_customer_ref/static/src/js/CustomerReferenceField.js',
+            'bi_pos_customer_ref/static/src/xml/pos.xml',
         ],
     },
     # only loaded in demonstration mode
