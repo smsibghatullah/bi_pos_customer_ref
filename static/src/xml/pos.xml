@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+  <t t-name="CustomDemoButtons" owl="1">
+    <div class="control-button" style="color:black">
+      <i class="fa fa-file-text-o mx-4"></i>
+      <span>Customer Reference</span>
+    </div>
+  </t>
+  <t t-name="TextInputPopup">
+    <div class="popup-content">
+      <div class="popup-header">
+        <h2>Enter Customer Reference</h2>
+      </div>
+      <div class="popup-body">
+        <input type="text" t-model="payload.value"/>
+      </div>
+      <div class="popup-footer">
+        <button class="btn btn-primary" t-on-click="confirm">Ok</button>
+        <button class="btn btn-secondary" t-on-click="cancel">Cancel</button>
+      </div>
+    </div>
+  </t>
+</templates>
+

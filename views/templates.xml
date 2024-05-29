@@ -1,0 +1,27 @@
+<!-- 
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="bi_pos_product_toppings.CustomerReferenceField">
+        <div class="control-button customer-button btn rounded-0 fw-bolder text-truncate" t-on-click="showPopup()">
+            <i class="fa fa-user me-1" role="img" aria-label="Customer Reference" title="Customer Reference" />
+            <span t-if="customerRef">Customer Ref: <t t-esc="customerRef"/></span>
+            <span t-if="!customerRef">Add Customer Ref</span>
+        </div>
+    </t>
+
+    <t t-name="bi_pos_product_toppings.TextInputPopup">
+        <div class="popup">
+            <div class="modal-header">
+                <h4 class="modal-title title drag-handle">Enter Customer Reference</h4>
+            </div>
+            <main class="body modal-body">
+                <input type="text" t-att-value="value" t-on-input="updateValue"/>
+            </main>
+            <footer class="footer modal-footer">
+                <div class="button cancel btn btn-lg btn-secondary" t-on-click="cancel">Cancel</div>
+                <div class="button ok btn btn-lg btn-primary" t-on-click="confirm">Save</div>
+            </footer>
+        </div>
+    </t>
+</templates>
+    -->
