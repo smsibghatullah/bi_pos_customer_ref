@@ -9,7 +9,7 @@
         <field name="arch" type="xml">
             <xpath expr="//page[@name='extra']" position="inside">
                 <group string="Extra Information">
-                    <field name="customer_reference"/>
+                    <field name="customer_reference" readonly="1"/>
                 </group>
             </xpath>
         </field>

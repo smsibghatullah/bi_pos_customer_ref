@@ -20,11 +20,12 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base','point_of_sale','pos_restaurant'],
+    'depends': ['base','point_of_sale','pos_restaurant','web','account'],
 
     # always loaded
     'data': [
         # 'security/ir.model.access.csv',
+        'views/templates.xml',
         'views/views.xml',
     ],
 'assets': {
