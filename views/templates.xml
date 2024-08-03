@@ -169,8 +169,59 @@
                                 <table class="table table-sm table-borderless" style="page-break-inside: avoid;">
 
                                     <!--Tax totals-->
-                                    <t t-set="tax_totals" t-value="o.tax_totals"/>
-                                    <t t-call="account.document_tax_totals"/>
+                                    <t t-set="tax_totals" t-value="o.tax_totals" />
+                                    <t t-foreach="tax_totals['subtotals']" t-as="subtotal">
+                                        <tr class="border-black o_subtotal">
+                                            <td><strong t-esc="subtotal['name']"/></td>
+
+                                            <td class="text-end">
+                                                <span
+                                                    t-att-class="oe_subtotal_footer_separator"
+                                                    t-esc="subtotal['amount']"
+                                                    t-options='{"widget": "float", "precision": 3}'
+                                                />
+                                            </td>
+                                        </tr>
+
+                                        <t t-set="subtotal_to_show" t-value="subtotal['name']"/>
+                                        <t t-foreach="tax_totals['groups_by_subtotal'][subtotal_to_show]" t-as="amount_by_group">
+                                                <tr>
+                                                    <t t-if="tax_totals['display_tax_base']">
+                                                        <td>
+                                                            <span t-esc="amount_by_group['tax_group_name']"/>
+                                                            <span t-if="not amount_by_group['hide_base_amount']" class="text-nowrap"> on
+                                                                <t t-esc="amount_by_group['formatted_tax_group_base_amount']"/>
+                                                            </span>
+                                                        </td>
+                                                        <td class="text-end o_price_total">
+                                                            <span class="text-nowrap" t-esc="amount_by_group['formatted_tax_group_amount']"/>
+                                                        </td>
+                                                    </t>
+                                                    <t t-else="">
+                                                        <td><span class="text-nowrap" t-esc="amount_by_group['tax_group_name']"/></td>
+                                                        <td class="text-end o_price_total">
+                                                            <span class="text-nowrap" t-esc="amount_by_group['tax_group_amount']"  t-options='{"widget": "float", "precision": 3}'/>
+                                                        </td>
+                                                    </t>
+                                                </tr>
+                                            </t>
+                                    </t>
+
+                                    <t t-if="'formatted_rounding_amount' in tax_totals and tax_totals['rounding_amount'] != 0">
+                                        <td>Rounding</td>
+                                        <td class="text-end">
+                                            <span t-esc="tax_totals['rounding_amount']" t-options='{"widget": "float", "precision": 3}'/>
+                                        </td>
+                                    </t>
+                                    
+                                    <!--Total amount with all taxes-->
+                                    <tr class="border-black o_total">
+                                        <td><strong>Total </strong></td>
+                                        <td  class="text-end">
+                                            <span t-esc="tax_totals['formatted_amount_total_rounded']" t-if="'formatted_amount_total_rounded' in tax_totals"/>
+                                            <span t-esc="tax_totals['amount_total']" t-options='{"widget": "float", "precision": 3}' t-else=""/>
+                                        </td>
+                                    </tr>
 
                                     <!--Payments-->
                                     <t t-if="print_with_payments">
@@ -182,7 +233,7 @@
                                                         <i class="oe_form_field text-end oe_payment_label">Paid on <t t-esc="payment_vals['date']" t-options="{&quot;widget&quot;: &quot;date&quot;}"/></i>
                                                     </td>
                                                     <td class="text-end">
-                                                        <span t-esc="payment_vals['amount']" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.currency_id}"/>
+                                                        <span t-esc="payment_vals['amount']" t-options='{"widget": "float", "precision": 3,"display_currency": o.currency_id}'/>
                                                     </td>
                                                 </tr>
                                             </t>
@@ -190,7 +241,7 @@
                                                 <tr class="border-black fw-bold">
                                                     <td>Amount Due</td>
                                                     <td class="text-end">
-                                                        <span t-field="o.amount_residual"/>
+                                                        <span t-field="o.amount_residual" t-options='{"widget": "float", "precision": 3}'/>
                                                     </td>
                                                 </tr>
                                                 </t>
