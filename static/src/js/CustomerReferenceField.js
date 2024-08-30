@@ -1,81 +1,75 @@
+odoo.define('pos_button.Suggestion', function(require) {
+    'use strict';
+
+    const Order = require('point_of_sale.models').Order;
+    const Registries = require('point_of_sale.Registries');
+
+    const Suggestion = (Order) => class Suggestion extends Order {
+        constructor(...args) {
+            super(...args);
+            this.customer_reference = this.customer_reference || null;
+        }
+
+        set_customer_reference(customer_reference) {
+            this.customer_reference = customer_reference;
+        }
+
+        export_as_JSON() {
+            const json = super.export_as_JSON(...arguments);
+            json.customer_reference = this.customer_reference;
+            return json;
+        }
+
+        init_from_JSON(json) {
+            super.init_from_JSON(...arguments);
+            this.customer_reference = json.customer_reference;
+        }
+    };
+
+    Registries.Model.extend(Order, Suggestion);
+});
+
+
 odoo.define('pos_button.Custom', function(require) {
     'use strict';
-      const { Gui } = require('point_of_sale.Gui');
-      const PosComponent = require('point_of_sale.PosComponent');
-      const { identifyError } = require('point_of_sale.utils');
-      const ProductScreen = require('point_of_sale.ProductScreen');
-      const { useListener } = require("@web/core/utils/hooks");
-      const Registries = require('point_of_sale.Registries');
-      const PaymentScreen = require('point_of_sale.PaymentScreen');
-      const { useService } = require("@web/core/utils/hooks");
 
-      class CustomDemoButtons extends PosComponent {
-          setup() {
-              super.setup();
-            //   this.orm = useService("orm");
-              useListener('click', this.onClick);
-          }
-          async onClick() {
+    const PosComponent = require('point_of_sale.PosComponent');
+    const { useListener } = require("@web/core/utils/hooks");
+    const ProductScreen = require('point_of_sale.ProductScreen');
+    const Registries = require('point_of_sale.Registries');
+
+    class CustomDemoButtons extends PosComponent {
+        setup() {
+            super.setup();
+            useListener('click', this.onClick);
+        }
+       
+        async onClick() {
+            const order = this.env.pos.get_order();
+            const currentReference = order.customer_reference || '';
+            console.log(currentReference,"pppppppppppppppppppppppppp")
             const { confirmed, payload } = await this.showPopup("TextInputPopup", {
                 title: this.env._t('Enter Customer Reference'),
                 body: this.env._t('Please enter the customer reference:'),
+                value: currentReference,
             });
 
-                if (confirmed) {
-                    localStorage.setItem('customerReference', payload);
-                    
+            if (confirmed) {
+                const order = this.env.pos.get_order();
+                order.set_customer_reference(payload); // Corrected reference to order
+                console.log('Customer Reference Set:', order.customer_reference);
             }
         }
-        
-        
     }
+
     CustomDemoButtons.template = 'CustomDemoButtons';
-      ProductScreen.addControlButton({
-          component: CustomDemoButtons,
-          condition: function() {
-              return this.env.pos;
-          },
-      });
-      Registries.Component.add(CustomDemoButtons);
-      return CustomDemoButtons;
+
+    ProductScreen.addControlButton({
+        component: CustomDemoButtons,
+        condition: function() {
+            return this.env.pos;
+        },
     });
 
-
-odoo.define('bi_pos_product_toppings.PaymentScreen', function(require) {
-    'use strict';
-    const PaymentScreen = require('point_of_sale.PaymentScreen');
-    const Registries = require('point_of_sale.Registries');
-    const session = require('web.session');
-
-    const InvoicePaymentScreen = PaymentScreen =>
-        class extends PaymentScreen {
-            setup() {
-                super.setup();
-            }
-
-            async validateOrder(isForceValidate) {
-                await super.validateOrder(isForceValidate);
-                const order = this.env.pos.get_order();
-                const orderId = order.uid;
-                const customerReference = localStorage.getItem('customerReference');
-                console.log("Order IDmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm:",customerReference, orderId);
-                const self = this;
-               
-                    this.rpc({
-                        model: 'pos.order',
-                        method: 'set_customer_reference',
-                        args: [orderId, customerReference],
-                    }).then(function(result) {
-                        console.log("RPC result:", result);
-                    }).guardedCatch(function(error) {
-                        console.error("RPC error:", error);
-                    });
-
-                }
-            }
-      
-
-    Registries.Component.extend(PaymentScreen, InvoicePaymentScreen);
-
-    return PaymentScreen;
+    Registries.Component.add(CustomDemoButtons);
 });
