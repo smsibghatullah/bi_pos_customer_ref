@@ -304,4 +304,329 @@
                 </div>
             </t>
     </template>
+
+    <template id="arabic_english_invoiceerdsaaq" inherit_id="l10n_sa.arabic_english_invoice">
+            <xpath expr="//div[hasclass('col-4')]//span[@t-if=&quot;o.move_type == &apos;out_invoice&apos; and o.state == &apos;posted&apos;&quot;]" position="replace">
+                    <span t-if="o.move_type == 'out_invoice' and o.state == 'posted'">
+                        <t t-if="o.pos_order_ids">
+                           Tax Invoice &amp; Delivery Note 
+                        </t>
+                        <t t-else="">
+                            Tax Invoice
+                        </t>
+                    </span>
+            </xpath>
+            <xpath expr="//div[hasclass('col-4')][3]//span[@t-if=&quot;o.move_type == &apos;out_invoice&apos; and o.state == &apos;posted&apos;&quot;]" position="replace">
+                <span t-if="o.move_type == 'out_invoice' and o.state == 'posted'">
+                    <t t-if="o.pos_order_ids">
+                        فاتورة ضريبية أمر تسليم
+                    </t>
+                    <t t-else="">
+                        فاتورة ضريبية
+                    </t>
+                </span>
+            </xpath>
+            <xpath expr="//div[@id='informations']" position="replace">
+                <div id="informations" class="pb-3">
+                    <div class="row">
+                        <div class="col-6">
+                           <div class="row align-items-center" t-if="o.partner_id.mobile" name="customer_mobile">
+                                <div class="col-4">
+                                    <strong>Customer Mobile:</strong>
+                                </div>
+                                <div class="col-4 text-center">
+                                    <span t-field="o.partner_id.mobile"/>
+                                </div>
+                                <div class="col-4 text-end text-muted">
+                                    <strong>: رقم هاتف العميل</strong>
+                                </div>
+                            </div>
+                           
+                            <div class="row align-items-center" t-if="o.user_id" name="salesperson">
+                                <div class="col-4">
+                                    <strong>Salesperson:</strong>
+                                </div>
+                                <div class="col-4 text-center">
+                                    <span t-field="o.user_id.name"/>
+                                </div>
+                                <div class="col-4 text-end text-muted">
+                                    <strong>: مندوب مبيعات</strong>
+                                </div>
+                            </div>
+                            <div class="row align-items-center" t-if="o.user_id.mobile" name="mobile">
+                                <div class="col-4">
+                                    <strong>Mobile:</strong>
+                                </div>
+                                <div class="col-4 text-center">
+                                    <span t-field="o.user_id.mobile"/>
+                                </div>
+                                <div class="col-4 text-end text-muted">
+                                    <strong>: رقم الهاتف</strong>
+                                </div>
+                            </div>
+                            
+                        </div>
+
+                        <div class="col-6">
+                            <div class="row align-items-center" t-if="o.invoice_date" name="invoice_date">
+                                <div class="col-4">
+                                    <strong>Invoice Date:</strong>
+                                </div>
+                                <div class="col-4 text-center">
+                                    <span t-field="o.invoice_date"/>
+                                </div>
+                                <div class="col-4 text-end text-muted">
+                                    <strong>: تاريخ الفاتورة</strong>
+                                </div>
+                            </div>
+                            <div class="row align-items-center" t-if="o.invoice_date_due and o.move_type == 'out_invoice' and o.state == 'posted'" name="due_date">
+                                <div class="col-4">
+                                    <strong>Due Date:</strong>
+                                </div>
+                                <div class="col-4 text-center">
+                                    <span t-field="o.invoice_date_due"/>
+                                </div>
+                                <div class="col-4 text-end text-muted">
+                                    <strong>: تاريخ الاستحقاق</strong>
+                                </div>
+                            </div>
+                            <div class="row align-items-center" t-if="o.invoice_origin" name="origin">
+                                <div class="col-4">
+                                    <strong>Source:</strong>
+                                </div>
+                                <div class="col-4 text-center">
+                                    <span t-field="o.invoice_origin"/>
+                                </div>
+                                <div class="col-4 text-end text-muted">
+                                    <strong>: المصدر</strong>
+                                </div>
+                            </div>
+                            <div class="row align-items-center" t-if="o.partner_id.ref" name="customer_code">
+                                <div class="col-4">
+                                    <strong>Customer Code:</strong>
+                                </div>
+                                <div class="col-4 text-center">
+                                    <span t-field="o.partner_id.ref"/>
+                                </div>
+                                <div class="col-4 text-end text-muted">
+                                    <strong>: كود العميل</strong>
+                                </div>
+                            </div>
+                            <div class="row align-items-center" t-if="o.pos_order_ids.customer_reference" name="customer_reference">
+                                <div class="col-4">
+                                    <strong>Reference:</strong>
+                                </div>
+                                <div class="col-4 text-center">
+                                    <span t-field="o.pos_order_ids.customer_reference"/>
+                                </div>
+                                <div class="col-4 text-end text-muted">
+                                    <strong>: مرجع</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+    </template>
+
+     <template id="web.external_layout_standard">
+        <div t-attf-class="header o_company_#{company.id}_layout" t-att-style="report_header_style">
+            <div class="row">
+                <div class="col-3 mb4">
+                    <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" style="max-height: 45px;" alt="Logo"/>
+                </div>
+                <div class="col-9 text-end" style="margin-top:22px;" t-field="company.report_header" name="moto"/>
+            </div>
+            <div t-if="company.logo or company.report_header" class="row zero_min_height">
+                <div class="col-12">
+                    <div style="border-bottom: 1px solid black;"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6" name="company_address">
+                    <ul class="list-unstyled">
+                        <li t-if="company.is_company_details_empty"><t t-esc="company.partner_id" t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'/></li>
+                        <li t-else=""><t t-esc="company.company_details"/></li>
+                        <li t-if="forced_vat">
+                            <t t-esc="company.country_id.vat_label or 'Tax ID'"/>:
+                            <span t-esc="forced_vat"/>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div t-attf-class="article o_report_layout_standard o_company_#{company.id}_layout {{  'o_report_layout_background' if company.layout_background in ['Geometric', 'Custom']  else  '' }}" t-attf-style="background-image: url({{ 'data:image/png;base64,%s' % company.layout_background_image.decode('utf-8') if company.layout_background_image and company.layout_background == 'Custom' else '/base/static/img/bg_background_template.jpg' if company.layout_background == 'Geometric' else ''}});" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+            <div class="pt-5">
+                <!-- This div ensures that the address is not cropped by the header. -->
+                <t t-call="web.address_layout"/>
+            </div>
+            <t t-out="0"/>
+        </div>
+
+        <div t-attf-class="footer o_standard_footer o_company_#{company.id}_layout">
+            <div class="text-center" style="border-top: 1px solid black;">
+                <ul class="list-inline mb4">
+                    <div t-field="company.report_footer"/>
+                </ul>
+                <div style="position: absolute; right: 0px; bottom: -35px; text-align: right;">
+                        <img src="/bi_pos_customer_ref/static/src/img/qr_code.png" width="100" height="100"/>
+                </div>
+                <div t-if="report_type == 'pdf'" class="text-muted">
+                    Page: <span class="page"/> / <span class="topage"/>
+                   
+                </div>
+                <div t-if="report_type == 'pdf' and display_name_in_footer" class="text-muted">
+                    <span t-field="o.name"/>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="web.external_layout_bold">
+        <div t-attf-class="header o_company_#{company.id}_layout" t-att-style="report_header_style">
+            <div class="o_clean_header">
+                <div class="row">
+                    <div class="col-6">
+                        <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" alt="Logo"/>
+                    </div>
+                    <div class="col-5 offset-1" name="company_address">
+                        <ul class="list-unstyled">
+                            <li t-if="company.is_company_details_empty"><t t-esc="company.partner_id" t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'/></li>
+                            <li t-else=""><t t-esc="company.company_details"/></li>
+                            <li t-if="forced_vat">
+                                <t t-esc="company.country_id.vat_label or 'Tax ID'"/>:
+                                <span t-esc="forced_vat"/>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div t-attf-class="article o_report_layout_bold o_company_#{company.id}_layout {{  'o_report_layout_background' if company.layout_background in ['Geometric', 'Custom']  else  '' }}" t-attf-style="background-image: url({{ 'data:image/png;base64,%s' % company.layout_background_image.decode('utf-8') if company.layout_background_image and company.layout_background == 'Custom' else ('/base/static/img/bg_background_template.jpg' if company.layout_background == 'Geometric' else '') }});" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+            <t t-call="web.address_layout"/>
+            <t t-out="0"/>
+        </div>
+
+        <div t-attf-class="footer o_clean_footer o_company_#{company.id}_layout">
+            <div class="row">
+                <div class="col-4">
+                    <span t-field="company.report_footer"/>
+                </div>
+                <div class="col-4">
+                    <span t-if="company.is_company_details_empty" t-field="company.partner_id" t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'/>
+                    <span t-else="" t-field="company.company_details"/>
+                </div>
+                <div class="col-3">
+                    <div class="mt0 mb0 h5" t-field="company.report_header"/>
+                </div>
+                <div class="col-1">
+                    <ul t-if="report_type == 'pdf'" class="list-inline pagenumber float-end text-center">
+                        <li class="list-inline-item"><strong><span class="page"/></strong></li>
+                    </ul>
+                    <div class="list-inline mt-1  float-end text-center">
+                        <img src="/bi_pos_customer_ref/static/src/img/qr_code.png" width="100" height="100"/>
+                   </div>
+                </div>
+               
+            </div>
+        </div>
+    </template>
+
+        <template id="web.external_layout_striped">
+        <div t-attf-class="o_company_#{company.id}_layout header" t-att-style="report_header_style">
+            <div class="o_background_header">
+            <div class="float-end">
+                <div class="mt0 text-end h3" t-field="company.report_header"/>
+            </div>
+            <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" class="float-start" alt="Logo"/>
+            <div class="float-start company_address">
+                <ul class="list-unstyled">
+                    <li t-if="company.is_company_details_empty"><t t-esc="company.partner_id" t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'/></li>
+                    <li t-else=""><t t-esc="company.company_details"/></li>
+                    <li t-if="forced_vat">
+                        <t t-esc="company.country_id.vat_label or 'Tax ID'"/>:
+                        <span t-esc="forced_vat"/>
+                    </li>
+                </ul>
+            </div>
+            <div class="clearfix mb8"/>
+            </div>
+        </div>
+
+        <div t-attf-class="o_company_#{company.id}_layout article o_report_layout_striped {{  'o_report_layout_background' if company.layout_background in ['Geometric', 'Custom']  else  '' }}" t-attf-style="background-image: url({{ 'data:image/png;base64,%s' % company.layout_background_image.decode('utf-8') if company.layout_background_image and company.layout_background == 'Custom' else '/base/static/img/bg_background_template.jpg' if company.layout_background == 'Geometric' else ''}});" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+            <t t-call="web.address_layout"/>
+            <t t-out="0"/>
+        </div>
+
+        <div t-attf-class="o_company_#{company.id}_layout footer o_background_footer">
+            <div class="text-center">
+                <ul class="list-inline">
+                    <div t-field="company.report_footer"/>
+                </ul>
+                 <div style="position: absolute; right: 0px; bottom: -60px; text-align: right;">
+                        <img src="/bi_pos_customer_ref/static/src/img/qr_code.png" width="100" height="100"/>
+                </div>
+                <div t-if="report_type == 'pdf'" class="text-muted">
+                    Page:
+                    <span class="page"/>
+                    of
+                    <span class="topage"/>
+                </div>
+                <div t-if="report_type == 'pdf' and display_name_in_footer" class="text-muted">
+                    <span t-field="o.name"/>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="web.external_layout_boxed">
+        <div t-attf-class="header o_company_#{company.id}_layout" t-att-style="report_header_style">
+            <div class="o_boxed_header">
+            <div class="row mb8">
+                <div class="col-6">
+                    <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" alt="Logo"/>
+                </div>
+                <div class="col-6 text-end mb4">
+                    <div class="mt0 h4" t-field="company.report_header"/>
+                    <div name="company_address" class="float-end mb4">
+                        <ul class="list-unstyled">
+                            <li t-if="company.is_company_details_empty"><t t-esc="company.partner_id" t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'/></li>
+                            <li t-else=""><t t-esc="company.company_details"/></li>
+                            <li t-if="forced_vat">
+                                <t t-esc="company.country_id.vat_label or 'Tax ID'"/>:
+                                <span t-esc="forced_vat"/>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <div t-attf-class="article o_report_layout_boxed o_company_#{company.id}_layout {{  'o_report_layout_background' if company.layout_background in ['Geometric', 'Custom']  else  '' }}" t-attf-style="background-image: url({{ 'data:image/png;base64,%s' % company.layout_background_image.decode('utf-8') if company.layout_background_image and company.layout_background == 'Custom' else '/base/static/img/bg_background_template.jpg' if company.layout_background == 'Geometric' else ''}});" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+            <div class="pt-5">
+                <!-- This div ensures that the address is not cropped by the header. -->
+                <t t-call="web.address_layout"/>
+            </div>
+            <t t-out="0"/>
+        </div>
+
+        <div t-attf-class="footer o_boxed_footer o_company_#{company.id}_layout">
+            <div class="text-center">
+                <div t-field="company.report_footer"/>
+                 <div style="position: absolute; right: 0px; bottom: -60px; text-align: right;">
+                        <img src="/bi_pos_customer_ref/static/src/img/qr_code.png" width="100" height="100"/>
+                </div>
+                <div t-if="report_type == 'pdf'">
+                    Page: <span class="page"/> / <span class="topage"/>
+                </div>
+                <div t-if="report_type == 'pdf' and display_name_in_footer" class="text-muted">
+                    <span t-field="o.name"/>
+                </div>
+            </div>
+        </div>
+    </template>
+
 </odoo>

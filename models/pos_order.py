@@ -1,9 +1,32 @@
 from odoo import models, fields,api, _
+import qrcode
+import base64
+from io import BytesIO
 
 class AccountMove(models.Model):
     _inherit = 'account.move'
 
     customer_reference = fields.Char(string='Customer Reference')
+    qr_code = fields.Binary("QR Code", compute='_generate_qr_code')
+
+    def _generate_qr_code(self, **kwargs):
+        for rec in self:
+            if qrcode and base64:
+                qr = qrcode.QRCode(
+                    version=1,
+                    error_correction=qrcode.constants.ERROR_CORRECT_L,
+                    box_size=3,
+                    border=4,
+                )
+                qr.add_data(f"https://linktr.ee/akg_hardware")
+                qr.make(fit=True)
+                
+                img = qr.make_image(fill_color="black", back_color="white")
+                temp = BytesIO()
+                img.save(temp, format="PNG")
+                qr_image = base64.b64encode(temp.getvalue())
+
+                rec.qr_code = qr_image
 
 
 class PosOrder(models.Model):
@@ -87,3 +110,53 @@ class PosOrder(models.Model):
                     'credit': existing_terms_line_new_val < 0.0 and -existing_terms_line_new_val or 0.0,
                 })
         return new_move
+
+class ResCountry(models.Model):
+    _inherit = 'res.country'
+
+    qr_code_akg = fields.Binary("QR Code", compute='_generate_qr_code')
+
+    def _generate_qr_code(self, **kwargs):
+        for rec in self:
+            if qrcode and base64:
+                qr = qrcode.QRCode(
+                    version=1,
+                    error_correction=qrcode.constants.ERROR_CORRECT_L,
+                    box_size=3,
+                    border=4,
+                )
+                qr.add_data(f"https://linktr.ee/akg_hardware")
+                qr.make(fit=True)
+                
+                img = qr.make_image(fill_color="black", back_color="white")
+                temp = BytesIO()
+                img.save(temp, format="PNG")
+                qr_image = base64.b64encode(temp.getvalue())
+
+                rec.qr_code_akg = qr_image
+
+class BaseDocumentLayout(models.TransientModel):
+    _inherit = 'base.document.layout'
+
+    qr_code_akg = fields.Binary("QR Code", compute='_generate_qr_code', store=True)
+
+    def _generate_qr_code(self, **kwargs):
+        for rec in self:
+            if qrcode and base64:
+                qr = qrcode.QRCode(
+                    version=1,
+                    error_correction=qrcode.constants.ERROR_CORRECT_L,
+                    box_size=3,
+                    border=4,
+                )
+                qr.add_data(f"https://linktr.ee/akg_hardware")
+                qr.make(fit=True)
+                
+                img = qr.make_image(fill_color="black", back_color="white")
+                temp = BytesIO()
+                img.save(temp, format="PNG")
+                qr_image = base64.b64encode(temp.getvalue())
+
+                rec.qr_code_akg = qr_image
+
+
