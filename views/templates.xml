@@ -307,7 +307,7 @@
 
     <template id="arabic_english_invoiceerdsaaq" inherit_id="l10n_sa.arabic_english_invoice">
            <xpath expr="//div[hasclass('col-4')]//span[@t-if=&quot;o.move_type == &apos;out_invoice&apos; and o.state == &apos;posted&apos;&quot;]" position="replace">
-                <span t-if="o.move_type == 'out_invoice' and o.state == 'posted'" style="font-size: small;">
+                <span t-if="o.move_type == 'out_invoice' and o.state == 'posted'" style="font-size: medium;">
                     <t t-if="o.pos_order_ids">
                         Tax Invoice &amp; Delivery Note 
                     </t>
@@ -318,7 +318,7 @@
             </xpath>
 
             <xpath expr="//div[hasclass('col-4')][3]//span[@t-if=&quot;o.move_type == &apos;out_invoice&apos; and o.state == &apos;posted&apos;&quot;]" position="replace">
-                <span t-if="o.move_type == 'out_invoice' and o.state == 'posted'" style="font-size: small;">
+                <span t-if="o.move_type == 'out_invoice' and o.state == 'posted'" style="font-size: medium;">
                     <t t-if="o.pos_order_ids">
                         فاتورة ضريبية أمر تسليم
                     </t>
@@ -495,8 +495,11 @@
                     <div class="col-5 offset-1" name="company_address">
                         <ul class="list-unstyled">
                             <li><strong t-esc="company.name"/></li>
+                            <br/>
                             <li t-if="company.vat">Tax ID: <t t-esc="company.vat"/></li>
+                             <br/>
                             <li t-if="company.phone">Tel: <t t-esc="company.phone"/></li>
+                             <br/>
                             <li t-if="company.website"><a t-att-href="company.website" target="_blank"><t t-esc="company.website"/></a></li>
                         </ul>
                     </div>
