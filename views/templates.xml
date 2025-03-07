@@ -521,7 +521,7 @@
                 <div class="col-3">
                     <div class="mt0 mb0 h5" t-field="company.report_header"/>
                 </div>
-                <div class="col-1 d-flex align-items-center ms-1 mt-3">
+                <div class="col-1 d-flex align-items-center  mt-2" style="margin-right:20px">
                     <img src="/bi_pos_customer_ref/static/src/img/qr_code.png" width="80" height="80" class="me-2"/>
                     <ul t-if="report_type == 'pdf'" class="list-inline pagenumber  text-center">
                         <li class="list-inline-item"><strong><span class="page"/></strong></li>
