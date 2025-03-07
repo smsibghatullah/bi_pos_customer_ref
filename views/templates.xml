@@ -307,7 +307,7 @@
 
     <template id="arabic_english_invoiceerdsaaq" inherit_id="l10n_sa.arabic_english_invoice">
             <xpath expr="//div[hasclass('col-4')]//span[@t-if=&quot;o.move_type == &apos;out_invoice&apos; and o.state == &apos;posted&apos;&quot;]" position="replace">
-                <span t-if="o.move_type == 'out_invoice' and o.state == 'posted'" style="font-size: 20px; font-weight: bold;">
+                <span t-if="o.move_type == 'out_invoice' and o.state == 'posted'" style="font-size: 30px; font-weight: bold;">
                     <t t-if="o.pos_order_ids">
                         Tax Invoice &amp; Delivery Note 
                     </t>
@@ -319,7 +319,7 @@
 
 
             <xpath expr="//div[hasclass('col-4')][3]//span[@t-if=&quot;o.move_type == &apos;out_invoice&apos; and o.state == &apos;posted&apos;&quot;]" position="replace">
-                <span t-if="o.move_type == 'out_invoice' and o.state == 'posted'" style="font-size: 20px; font-weight: bold;">
+                <span t-if="o.move_type == 'out_invoice' and o.state == 'posted'" style="font-size: 30px; font-weight: bold;">
                     <t t-if="o.pos_order_ids">
                         فاتورة ضريبية أمر تسليم
                     </t>
@@ -329,9 +329,10 @@
                 </span>
             </xpath>
 
-            <xpath expr="//span[hasclass('o_invoice_name')]" position="attributes">
-                <attribute name="style">font-size: 20px; font-weight: bold;</attribute>
+            <xpath expr="//span[@t-field='o.name']" position="attributes">
+                <attribute name="style">font-size: 30px; font-weight: bold;</attribute>
             </xpath>
+
 
             <xpath expr="//div[@id='informations']" position="replace">
                 <div id="informations" class="pb-3">
