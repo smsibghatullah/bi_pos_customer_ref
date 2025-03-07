@@ -335,83 +335,111 @@
 
 
             <xpath expr="//div[@id='informations']" position="replace">
-              <div id="informations" class="pb-3">
-    <div class="row">
-        <!-- Left Column (Customer Info) -->
-        <div class="col-6">
-            <div class="row" t-if="o.partner_id.mobile">
-                <div class="col d-flex justify-content-between">
-                    <strong>Customer Mobile:</strong>
-                    <span t-field="o.partner_id.mobile"/>
-                    <strong class="text-muted">: رقم هاتف العميل</strong>
-                </div>
-            </div>
+               <div id="informations" class="pb-3">
+                    <div class="row">
+                        <!-- Left Column (Customer Info) -->
+                        <div class="col-6">
+                            <div class="row" t-if="o.partner_id.mobile">
+                                <div class="col-4">
+                                    <strong>Customer Mobile:</strong>
+                                </div>
+                                <div class="col-4 text-center">
+                                    <span t-field="o.partner_id.mobile"/>
+                                </div>
+                                <div class="col-4 text-end text-muted">
+                                    <strong>: رقم هاتف العميل</strong>
+                                </div>
+                            </div>
 
-            <div class="row" t-if="o.user_id">
-                <div class="col d-flex justify-content-between">
-                    <strong>Salesperson:</strong>
-                    <span t-field="o.user_id.name"/>
-                    <strong class="text-muted">: مندوب مبيعات</strong>
-                </div>
-            </div>
+                            <div class="row" t-if="o.user_id">
+                                <div class="col-4">
+                                    <strong>Salesperson:</strong>
+                                </div>
+                                <div class="col-4 text-center">
+                                    <span t-field="o.user_id.name"/>
+                                </div>
+                                <div class="col-4 text-end text-muted">
+                                    <strong>: مندوب مبيعات</strong>
+                                </div>
+                            </div>
 
-            <div class="row" t-if="o.user_id.mobile">
-                <div class="col d-flex justify-content-between">
-                    <strong>Mobile:</strong>
-                    <span t-field="o.user_id.mobile"/>
-                    <strong class="text-muted">: رقم الهاتف</strong>
-                </div>
-            </div>
-        </div>
+                            <div class="row" t-if="o.user_id.mobile">
+                                <div class="col-4">
+                                    <strong>Mobile:</strong>
+                                </div>
+                                <div class="col-4 text-center">
+                                    <span t-field="o.user_id.mobile"/>
+                                </div>
+                                <div class="col-4 text-end text-muted">
+                                    <strong>: رقم الهاتف</strong>
+                                </div>
+                            </div>
+                        </div>
 
-        <!-- Right Column (Invoice Details) - FULL RIGHT ALIGNMENT -->
-        <div class="col-6 text-end">
-            <div class="row" t-if="o.invoice_date">
-                <div class="col d-flex justify-content-between">
-                    <strong>Invoice Date</strong>
-                    <span t-field="o.invoice_date"/>
-                    <strong class="text-muted">: تاريخ الفاتورة</strong>
-                </div>
-            </div>
+                        <!-- Right Column (Invoice Details) - Now Right Aligned -->
+                        <div class="col-6 d-flex flex-column align-items-end">
+                            <div class="row w-100" t-if="o.invoice_date">
+                                <div class="col-4 ">
+                                    <strong>Invoice Date</strong>
+                                </div>
+                                <div class="col-4 text-center">
+                                    <span t-field="o.invoice_date"/>
+                                </div>
+                                <div class="col-4 text-end text-muted">
+                                    <strong>: تاريخ الفاتورة</strong>
+                                </div>
+                            </div>
 
-            <div class="row" t-if="o.invoice_date_due and o.move_type == 'out_invoice' and o.state == 'posted'">
-                <div class="col d-flex justify-content-between">
-                    <strong>Due Date</strong>
-                    <span t-field="o.invoice_date_due"/>
-                    <strong class="text-muted">: تاريخ الاستحقاق</strong>
-                    
-                </div>
-            </div>
+                            <div class="row w-100" t-if="o.invoice_date_due and o.move_type == 'out_invoice' and o.state == 'posted'">
+                                <div class="col-4 ">
+                                    <strong>Due Date</strong>
+                                </div>
+                                <div class="col-4 text-center">
+                                    <span t-field="o.invoice_date_due"/>
+                                </div>
+                                <div class="col-4 text-end text-muted">
+                                    <strong>: تاريخ الاستحقاق</strong>
+                                </div>
+                            </div>
 
-            <div class="row" t-if="o.invoice_origin">
-                <div class="col d-flex justify-content-between">
-                    <strong>Source</strong>
-                    <span t-field="o.invoice_origin"/>
-                    <strong class="text-muted">: المصدر</strong>
-                   
-                </div>
-            </div>
+                            <div class="row w-100" t-if="o.invoice_origin">
+                                <div class="col-4 ">
+                                    <strong>Source</strong>
+                                </div>
+                                <div class="col-4 text-center">
+                                    <span t-field="o.invoice_origin"/>
+                                </div>
+                                <div class="col-4 text-end text-muted">
+                                    <strong>: المصدر</strong>
+                                </div>
+                            </div>
 
-            <div class="row" t-if="o.partner_id.ref">
-                <div class="col d-flex justify-content-between">
-                    <strong>Customer Code</strong>
-                    <span t-field="o.partner_id.ref"/>
-                    <strong class="text-muted">: كود العميل</strong>
-                   
-                </div>
-            </div>
+                            <div class="row w-100" t-if="o.partner_id.ref">
+                                <div class="col-4 ">
+                                    <strong>Customer Code</strong>
+                                </div>
+                                <div class="col-4 text-center">
+                                    <span t-field="o.partner_id.ref"/>
+                                </div>
+                                <div class="col-4 text-end text-muted">
+                                    <strong>: كود العميل</strong>
+                                </div>
+                            </div>
 
-            <div class="row" t-if="o.pos_order_ids.customer_reference">
-                <div class="col d-flex justify-content-between">
-                    <strong>Reference</strong>
-                    <span t-field="o.pos_order_ids.customer_reference"/>
-                    <strong class="text-muted">: مرجع</strong>
-                    
+                            <div class="row w-100" t-if="o.pos_order_ids.customer_reference">
+                                <div class="col-4 ">
+                                    <strong>Reference</strong>
+                                </div>
+                                <div class="col-4 text-center">
+                                    <span t-field="o.pos_order_ids.customer_reference"/>
+                                </div>
+                                <div class="col-4 text-end text-muted">
+                                    <strong>: مرجع</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
 
             </xpath>
 
