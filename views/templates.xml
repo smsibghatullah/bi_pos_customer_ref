@@ -335,23 +335,22 @@
 
 
             <xpath expr="//div[@id='informations']" position="replace">
-               <div id="informations" class="pb-3">
+                <div id="informations" class="pb-3">
                     <div class="row">
-                        <!-- Left Column (Customer Info) -->
-                        <div class="col-6">
-                            <div class="row" t-if="o.partner_id.mobile">
+                        <div class="col-6 mx-1">
+                           <div class="row align-items-center" t-if="o.partner_id.mobile" name="customer_mobile">
                                 <div class="col-4">
                                     <strong>Customer Mobile:</strong>
                                 </div>
                                 <div class="col-4 text-center">
                                     <span t-field="o.partner_id.mobile"/>
                                 </div>
-                                <div class="col-4 text-end text-muted">
+                                <div class="col-4 text-end text-muted " style="white-space: nowrap;">
                                     <strong>: رقم هاتف العميل</strong>
                                 </div>
                             </div>
-
-                            <div class="row" t-if="o.user_id">
+                           
+                            <div class="row align-items-center" t-if="o.user_id" name="salesperson">
                                 <div class="col-4">
                                     <strong>Salesperson:</strong>
                                 </div>
@@ -362,8 +361,7 @@
                                     <strong>: مندوب مبيعات</strong>
                                 </div>
                             </div>
-
-                            <div class="row" t-if="o.user_id.mobile">
+                            <div class="row align-items-center" t-if="o.user_id.mobile" name="mobile">
                                 <div class="col-4">
                                     <strong>Mobile:</strong>
                                 </div>
@@ -374,13 +372,13 @@
                                     <strong>: رقم الهاتف</strong>
                                 </div>
                             </div>
+                            
                         </div>
 
-                        <!-- Right Column (Invoice Details) - Now Right Aligned -->
-                        <div class="col-6 d-flex flex-column align-items-end">
-                            <div class="row w-100" t-if="o.invoice_date">
-                                <div class="col-4 ">
-                                    <strong>Invoice Date</strong>
+                        <div class="col-6">
+                            <div class="row align-items-center" t-if="o.invoice_date" name="invoice_date">
+                                <div class="col-4">
+                                    <strong>Invoice Date:</strong>
                                 </div>
                                 <div class="col-4 text-center">
                                     <span t-field="o.invoice_date"/>
@@ -389,10 +387,9 @@
                                     <strong>: تاريخ الفاتورة</strong>
                                 </div>
                             </div>
-
-                            <div class="row w-100" t-if="o.invoice_date_due and o.move_type == 'out_invoice' and o.state == 'posted'">
-                                <div class="col-4 ">
-                                    <strong>Due Date</strong>
+                            <div class="row align-items-center" t-if="o.invoice_date_due and o.move_type == 'out_invoice' and o.state == 'posted'" name="due_date">
+                                <div class="col-4">
+                                    <strong>Due Date:</strong>
                                 </div>
                                 <div class="col-4 text-center">
                                     <span t-field="o.invoice_date_due"/>
@@ -401,10 +398,9 @@
                                     <strong>: تاريخ الاستحقاق</strong>
                                 </div>
                             </div>
-
-                            <div class="row w-100" t-if="o.invoice_origin">
-                                <div class="col-4 ">
-                                    <strong>Source</strong>
+                            <div class="row align-items-center" t-if="o.invoice_origin" name="origin">
+                                <div class="col-4">
+                                    <strong>Source:</strong>
                                 </div>
                                 <div class="col-4 text-center">
                                     <span t-field="o.invoice_origin"/>
@@ -413,10 +409,9 @@
                                     <strong>: المصدر</strong>
                                 </div>
                             </div>
-
-                            <div class="row w-100" t-if="o.partner_id.ref">
-                                <div class="col-4 ">
-                                    <strong>Customer Code</strong>
+                            <div class="row align-items-center" t-if="o.partner_id.ref" name="customer_code">
+                                <div class="col-4">
+                                    <strong>Customer Code:</strong>
                                 </div>
                                 <div class="col-4 text-center">
                                     <span t-field="o.partner_id.ref"/>
@@ -425,10 +420,9 @@
                                     <strong>: كود العميل</strong>
                                 </div>
                             </div>
-
-                            <div class="row w-100" t-if="o.pos_order_ids.customer_reference">
-                                <div class="col-4 ">
-                                    <strong>Reference</strong>
+                            <div class="row align-items-center" t-if="o.pos_order_ids.customer_reference" name="customer_reference">
+                                <div class="col-4">
+                                    <strong>Reference:</strong>
                                 </div>
                                 <div class="col-4 text-center">
                                     <span t-field="o.pos_order_ids.customer_reference"/>
@@ -440,10 +434,9 @@
                         </div>
                     </div>
                 </div>
-
             </xpath>
 
-           <xpath expr="//div[contains(@class, 'clearfix')]" position="replace">
+             <xpath expr="//div[contains(@class, 'clearfix')]" position="replace">
                    <div class="clearfix pt-4 pb-3">
                             <div id="total" class="row">
                                 <div class="col-6">
@@ -543,6 +536,9 @@
                         </div>
                 </xpath>
 
+
+
+            
     </template>
 
      <template id="web.external_layout_standard">
