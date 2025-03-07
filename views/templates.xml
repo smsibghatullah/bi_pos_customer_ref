@@ -521,9 +521,11 @@
                 <div class="col-3">
                     <div class="mt0 mb0 h5" t-field="company.report_header"/>
                 </div>
-                <div class="col-1 d-flex align-items-center  mt-2" style="margin-right:60px">
+                <div class="col-2 d-flex align-items-center  mt-2" >
                     <img src="/bi_pos_customer_ref/static/src/img/qr_code.png" width="80" height="80" class="me-2"/>
-                    <ul t-if="report_type == 'pdf'" class="list-inline pagenumber  text-center">
+                </div>
+                <div class="col-1">
+                    <ul t-if="report_type == 'pdf'" class="list-inline pagenumber float-end text-center">
                         <li class="list-inline-item"><strong><span class="page"/></strong></li>
                     </ul>
                 </div>
