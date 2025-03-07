@@ -329,7 +329,7 @@
             <xpath expr="//div[@id='informations']" position="replace">
                 <div id="informations" class="pb-3">
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-6 mx-2">
                            <div class="row align-items-center" t-if="o.partner_id.mobile" name="customer_mobile">
                                 <div class="col-4">
                                     <strong>Customer Mobile:</strong>
@@ -521,13 +521,13 @@
                 <div class="col-3">
                     <div class="mt0 mb0 h5" t-field="company.report_header"/>
                 </div>
-                <div class="col-1">
-                    <ul t-if="report_type == 'pdf'" class="list-inline pagenumber float-end text-center">
+               <div class="col-1 d-flex flex-column align-items-center">
+                    <div class="mt-1">
+                        <img src="/bi_pos_customer_ref/static/src/img/qr_code.png" width="100" height="100"/>
+                    </div>
+                    <ul t-if="report_type == 'pdf'" class="list-inline pagenumber text-center mt-2">
                         <li class="list-inline-item"><strong><span class="page"/></strong></li>
                     </ul>
-                    <div class="list-inline mt-1  float-end text-center">
-                        <img src="/bi_pos_customer_ref/static/src/img/qr_code.png" width="100" height="100"/>
-                   </div>
                 </div>
                
             </div>
