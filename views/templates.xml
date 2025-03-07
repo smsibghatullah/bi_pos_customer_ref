@@ -337,104 +337,178 @@
             <xpath expr="//div[@id='informations']" position="replace">
                 <div id="informations" class="pb-3">
                     <div class="row">
-                        <div class="col-6 mx-1">
-                           <div class="row align-items-center" t-if="o.partner_id.mobile" name="customer_mobile">
-                                <div class="col-4">
+                        <div class="col-6 ">
+                            <div class="row align-items-center" t-if="o.partner_id.mobile" name="customer_mobile">
+                                <div class="col d-flex justify-content-between">
                                     <strong>Customer Mobile:</strong>
-                                </div>
-                                <div class="col-4 text-center">
                                     <span t-field="o.partner_id.mobile"/>
-                                </div>
-                                <div class="col-4 text-end text-muted">
-                                    <strong>: رقم هاتف العميل</strong>
+                                    <strong class="text-muted">: رقم هاتف العميل</strong>
                                 </div>
                             </div>
-                           
+
                             <div class="row align-items-center" t-if="o.user_id" name="salesperson">
-                                <div class="col-4">
+                                <div class="col d-flex justify-content-between">
                                     <strong>Salesperson:</strong>
-                                </div>
-                                <div class="col-4 text-center">
                                     <span t-field="o.user_id.name"/>
-                                </div>
-                                <div class="col-4 text-end text-muted">
-                                    <strong>: مندوب مبيعات</strong>
+                                    <strong class="text-muted">: مندوب مبيعات</strong>
                                 </div>
                             </div>
+
                             <div class="row align-items-center" t-if="o.user_id.mobile" name="mobile">
-                                <div class="col-4">
+                                <div class="col d-flex justify-content-between">
                                     <strong>Mobile:</strong>
-                                </div>
-                                <div class="col-4 text-center">
                                     <span t-field="o.user_id.mobile"/>
-                                </div>
-                                <div class="col-4 text-end text-muted">
-                                    <strong>: رقم الهاتف</strong>
+                                    <strong class="text-muted">: رقم الهاتف</strong>
                                 </div>
                             </div>
-                            
                         </div>
 
                         <div class="col-6">
                             <div class="row align-items-center" t-if="o.invoice_date" name="invoice_date">
-                                <div class="col-4">
+                                <div class="col d-flex justify-content-between">
                                     <strong>Invoice Date:</strong>
-                                </div>
-                                <div class="col-4 text-center">
                                     <span t-field="o.invoice_date"/>
-                                </div>
-                                <div class="col-4 text-end text-muted">
-                                    <strong>: تاريخ الفاتورة</strong>
+                                    <strong class="text-muted">: تاريخ الفاتورة</strong>
                                 </div>
                             </div>
+
                             <div class="row align-items-center" t-if="o.invoice_date_due and o.move_type == 'out_invoice' and o.state == 'posted'" name="due_date">
-                                <div class="col-4">
+                                <div class="col d-flex justify-content-between">
                                     <strong>Due Date:</strong>
-                                </div>
-                                <div class="col-4 text-center">
                                     <span t-field="o.invoice_date_due"/>
-                                </div>
-                                <div class="col-4 text-end text-muted">
-                                    <strong>: تاريخ الاستحقاق</strong>
+                                    <strong class="text-muted">: تاريخ الاستحقاق</strong>
                                 </div>
                             </div>
+
                             <div class="row align-items-center" t-if="o.invoice_origin" name="origin">
-                                <div class="col-4">
+                                <div class="col d-flex justify-content-between">
                                     <strong>Source:</strong>
-                                </div>
-                                <div class="col-4 text-center">
                                     <span t-field="o.invoice_origin"/>
-                                </div>
-                                <div class="col-4 text-end text-muted">
-                                    <strong>: المصدر</strong>
+                                    <strong class="text-muted">: المصدر</strong>
                                 </div>
                             </div>
+
                             <div class="row align-items-center" t-if="o.partner_id.ref" name="customer_code">
-                                <div class="col-4">
+                                <div class="col d-flex justify-content-between">
                                     <strong>Customer Code:</strong>
-                                </div>
-                                <div class="col-4 text-center">
                                     <span t-field="o.partner_id.ref"/>
-                                </div>
-                                <div class="col-4 text-end text-muted">
-                                    <strong>: كود العميل</strong>
+                                    <strong class="text-muted">: كود العميل</strong>
                                 </div>
                             </div>
+
                             <div class="row align-items-center" t-if="o.pos_order_ids.customer_reference" name="customer_reference">
-                                <div class="col-4">
+                                <div class="col d-flex justify-content-between">
                                     <strong>Reference:</strong>
-                                </div>
-                                <div class="col-4 text-center">
                                     <span t-field="o.pos_order_ids.customer_reference"/>
-                                </div>
-                                <div class="col-4 text-end text-muted">
-                                    <strong>: مرجع</strong>
+                                    <strong class="text-muted">: مرجع</strong>
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </xpath>
+
+           <xpath expr="//div[contains(@class, 'clearfix')]" position="replace">
+                   <div class="clearfix pt-4 pb-3">
+                            <div id="total" class="row">
+                                <div class="col-6">
+                                    <table class="table table-sm" style="page-break-inside: avoid;">
+                                        <tr class="border-black o_subtotal">
+                                            <td class="text-end">
+                                                <span t-field="o.amount_untaxed"/>
+                                            </td>
+                                            <td class="text-end">
+                                                <strong>
+                                                    Subtotal
+                                                    /
+                                                    الإجمالي الفرعي
+                                                </strong>
+                                            </td>
+                                        </tr>
+                                        <t t-set="tax_totals" t-value="o.tax_totals"/>
+                                        <t t-foreach="tax_totals['subtotals']" t-as="subtotal">
+                                            <t t-set="subtotal_to_show" t-value="subtotal['name']"/>
+                                            <!-- copy-pasted template "account.tax_groups_totals" with reversed columns order -->
+                                            <t t-foreach="tax_totals['groups_by_subtotal'][subtotal_to_show]" t-as="amount_by_group">
+                                                <tr>
+                                                    <t t-if="tax_totals['display_tax_base']">
+                                                        <td class="text-end o_price_total">
+                                                            <span class="text-nowrap" t-esc="amount_by_group['formatted_tax_group_amount']"/>
+                                                        </td>
+                                                        <td class="text-end">
+                                                            <span t-esc="amount_by_group['tax_group_name']"/>
+                                                            <span class="text-nowrap"> on
+                                                                <t t-esc="amount_by_group['formatted_tax_group_base_amount']"/>
+                                                            </span>
+                                                        </td>
+                                                    </t>
+                                                    <t t-else="">
+                                                        <td class="text-end o_price_total">
+                                                            <span class="text-nowrap" t-esc="amount_by_group['formatted_tax_group_amount']" />
+                                                        </td>
+                                                        <td class="text-end"><span class="text-nowrap" t-esc="amount_by_group['tax_group_name']"/></td>
+                                                    </t>
+                                                </tr>
+                                            </t>
+
+                                        </t>
+                                        <tr class="border-black o_total">
+                                            <td class="text-end">
+                                                <span class="text-nowrap" t-field="o.amount_total"/>
+                                            </td>
+                                            <td class="text-end">
+                                                <strong>
+                                                    Total
+                                                    /
+                                                    المجموع
+                                                </strong>
+                                            </td>
+                                        </tr>
+
+                                        <t t-if="print_with_payments">
+                                            <t t-if="o.payment_state != 'invoicing_legacy'">
+                                                <t t-set="payments_vals" t-value="o.sudo().invoice_payments_widget and o.sudo().invoice_payments_widget['content'] or []"/>
+                                                <t t-foreach="payments_vals" t-as="payment_vals">
+                                                    <tr class="border-black o_total">
+                                                        <td>
+                                                            <i class="row">
+                                                                <div class="col-7 oe_form_field oe_payment_label">
+                                                                    Paid on/دفعت في:
+                                                                </div>
+                                                                <div class="col-5 ps-0 oe_form_field oe_payment_label">
+                                                                    <t t-out="payment_vals['date']"/>
+                                                                </div>
+                                                            </i>
+                                                        </td>
+                                                        <td class="text-end">
+                                                            <span t-out="payment_vals['amount']"
+                                                                t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                                        </td>
+                                                    </tr>
+                                                </t>
+                                                <t t-if="len(payments_vals) > 0">
+                                                    <tr class="border-black" >
+                                                        <td style="white-space: nowrap;">
+                                                            <strong>
+                                                                Amount Due
+                                                                /
+                                                                المبلغ المستحق
+                                                            </strong>
+                                                        </td>
+                                                        <td class="text-end">
+                                                            <span t-field="o.amount_residual"/>
+                                                        </td>
+                                                    </tr>
+                                                </t>
+                                            </t>
+                                        </t>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                </xpath>
+
     </template>
 
      <template id="web.external_layout_standard">
