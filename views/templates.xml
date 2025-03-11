@@ -319,14 +319,19 @@
 
 
             <xpath expr="//div[hasclass('col-4')][3]//span[@t-if=&quot;o.move_type == &apos;out_invoice&apos; and o.state == &apos;posted&apos;&quot;]" position="replace">
-                <span t-if="o.move_type == 'out_invoice' and o.state == 'posted'" style="font-size: 20px; font-weight: bold;">
-                    <t t-if="o.pos_order_ids">
+               <t t-if="o.pos_order_ids">
+                    <span t-if="o.move_type == 'out_invoice' and o.state == 'posted'" 
+                        style="font-family: 'Amiri', serif; font-size: 20px; font-weight: bold;">
                         فاتورة ضريبية أمر تسليم
-                    </t>
-                    <t t-else="">
+                    </span>
+                </t>
+                <t t-else="">
+                    <span t-if="o.move_type == 'out_invoice' and o.state == 'posted'" 
+                        style="font-family: 'Amiri', serif; font-size: 20px; font-weight: bold;">
                         فاتورة ضريبية
-                    </t>
-                </span>
+                    </span>
+                </t>
+
             </xpath>
 
             <xpath expr="//span[@t-field='o.name']" position="attributes">
@@ -346,7 +351,7 @@
                                     <span t-field="o.partner_id.mobile"/>
                                 </div>
                                 <div class="col-4 text-end text-muted " style="white-space: nowrap;">
-                                    <strong>: رقم هاتف العميل</strong>
+                                    <strong style="font-family: 'Amiri', serif;" >: رقم هاتف العميل</strong>
                                 </div>
                             </div>
                            
@@ -358,7 +363,7 @@
                                     <span t-field="o.user_id.name"/>
                                 </div>
                                 <div class="col-4 text-end text-muted">
-                                    <strong>: مندوب مبيعات</strong>
+                                    <strong style="font-family: 'Amiri', serif;">: مندوب مبيعات</strong>
                                 </div>
                             </div>
                             <div class="row align-items-center" t-if="o.user_id.mobile" name="mobile">
@@ -369,7 +374,7 @@
                                     <span t-field="o.user_id.mobile"/>
                                 </div>
                                 <div class="col-4 text-end text-muted">
-                                    <strong>: رقم الهاتف</strong>
+                                    <strong style="font-family: 'Amiri', serif;">: رقم الهاتف</strong>
                                 </div>
                             </div>
                             
@@ -384,7 +389,7 @@
                                     <span t-field="o.invoice_date"/>
                                 </div>
                                 <div class="col-4 text-end text-muted">
-                                    <strong>: تاريخ الفاتورة</strong>
+                                    <strong style="font-family: 'Amiri', serif;">: تاريخ الفاتورة</strong>
                                 </div>
                             </div>
                             <div class="row align-items-center" t-if="o.invoice_date_due and o.move_type == 'out_invoice' and o.state == 'posted'" name="due_date">
@@ -395,7 +400,7 @@
                                     <span t-field="o.invoice_date_due"/>
                                 </div>
                                 <div class="col-4 text-end text-muted">
-                                    <strong>: تاريخ الاستحقاق</strong>
+                                    <strong style="font-family: 'Amiri', serif;">: تاريخ الاستحقاق</strong>
                                 </div>
                             </div>
                             <div class="row align-items-center" t-if="o.invoice_origin" name="origin">
@@ -406,7 +411,7 @@
                                     <span t-field="o.invoice_origin"/>
                                 </div>
                                 <div class="col-4 text-end text-muted">
-                                    <strong>: المصدر</strong>
+                                    <strong style="font-family: 'Amiri', serif;">: المصدر</strong>
                                 </div>
                             </div>
                             <div class="row align-items-center" t-if="o.partner_id.ref" name="customer_code">
@@ -417,7 +422,7 @@
                                     <span t-field="o.partner_id.ref"/>
                                 </div>
                                 <div class="col-4 text-end text-muted">
-                                    <strong>: كود العميل</strong>
+                                    <strong style="font-family: 'Amiri', serif;">: كود العميل</strong>
                                 </div>
                             </div>
                             <div class="row align-items-center" t-if="o.pos_order_ids.customer_reference" name="customer_reference">
@@ -428,7 +433,7 @@
                                     <span t-field="o.pos_order_ids.customer_reference"/>
                                 </div>
                                 <div class="col-4 text-end text-muted">
-                                    <strong>: مرجع</strong>
+                                    <strong style="font-family: 'Amiri', serif;">: مرجع</strong>
                                 </div>
                             </div>
                         </div>
@@ -446,7 +451,7 @@
                                                 <span t-field="o.amount_untaxed"/>
                                             </td>
                                             <td class="text-end">
-                                                <strong>
+                                                <strong style="font-family: 'Amiri', serif;">
                                                     Subtotal
                                                     /
                                                     الإجمالي الفرعي
@@ -485,7 +490,7 @@
                                                 <span class="text-nowrap" t-field="o.amount_total"/>
                                             </td>
                                             <td class="text-end">
-                                                <strong>
+                                                <strong style="font-family: 'Amiri', serif;">
                                                     Total
                                                     /
                                                     المجموع
@@ -500,7 +505,7 @@
                                                     <tr class="border-black o_total">
                                                         <td>
                                                             <i class="row">
-                                                                <div class="col-7 oe_form_field oe_payment_label">
+                                                                <div style="font-family: 'Amiri', serif;" class="col-7 oe_form_field oe_payment_label">
                                                                     Paid on/دفعت في:
                                                                 </div>
                                                                 <div class="col-5 ps-0 oe_form_field oe_payment_label">
@@ -517,7 +522,7 @@
                                                 <t t-if="len(payments_vals) > 0">
                                                     <tr class="border-black" >
                                                         <td style="white-space: nowrap;">
-                                                            <strong>
+                                                            <strong style="font-family: 'Amiri', serif;">
                                                                 Amount Due
                                                                 /
                                                                 المبلغ المستحق
@@ -742,5 +747,39 @@
             </div>
         </div>
     </template>
+
+     <template id="report_saleorder_document_salesperson_phone_number" inherit_id="sale.report_saleorder_document">
+           <xpath expr="//div[@id='informations']" position="replace">
+                           <div class="row mt-4 mb-4" id="informations">
+                                <div t-if="doc.client_order_ref" class="col-auto col-3 mw-100 mb-2" name="informations_reference">
+                                    <strong>Your Reference:</strong>
+                                    <p class="m-0" t-field="doc.client_order_ref"/>
+                                </div>
+                                <div t-if="doc.date_order" class="col-auto col-3 mw-100 mb-2" name="informations_date">
+                                    <strong t-if="doc.state in ['draft', 'sent']">Quotation Date:</strong>
+                                    <strong t-else="">Order Date:</strong>
+                                    <p class="m-0" t-field="doc.date_order" t-options='{"widget": "date"}'/>
+                                </div>
+                                <div t-if="doc.validity_date and doc.state in ['draft', 'sent']"
+                                    class="col-auto col-3 mw-100 mb-2"
+                                    name="expiration_date">
+                                    <strong>Expiration:</strong>
+                                    <p class="m-0" t-field="doc.validity_date"/>
+                                </div>
+                                <div t-if="doc.user_id.name" class="col-auto col-3 mw-100 mb-2">
+                                    <strong>Salesperson:</strong>
+                                    <p class="m-0" t-field="doc.user_id"/>
+                                </div>
+                                <div t-if="doc.user_id.mobile" class="col-auto col-3 mw-100 mb-2">
+                                    <strong>Mobile Number:</strong>
+                                    <p class="m-0" t-field="doc.user_id.mobile"/>
+                                </div>
+                                <div t-else="True" t-if="doc.user_id.phone" class="col-auto col-3 mw-100 mb-2">
+                                    <strong>Phone Number:</strong>
+                                    <p class="m-0" t-field="doc.user_id.phone"/>
+                                </div>
+                            </div>
+           </xpath>
+     </template>
 
 </odoo>
