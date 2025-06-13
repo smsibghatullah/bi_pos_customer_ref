@@ -160,3 +160,20 @@ class BaseDocumentLayout(models.TransientModel):
                 rec.qr_code_akg = qr_image
 
 
+class SaleOrderLine(models.Model):
+    _inherit = 'sale.order.line'
+
+    x_display_price_unit = fields.Float(string="Unit Price", compute="_compute_display_price_unit")
+    x_display_discount = fields.Float(string="Discount", compute="_compute_display_discount")
+
+    @api.depends('price_unit')
+    def _compute_display_price_unit(self):
+        for line in self:
+            line.x_display_price_unit = line.price_unit
+
+    @api.depends('discount')
+    def _compute_display_discount(self):
+        for line in self:
+            line.x_display_discount = line.discount
+
+  

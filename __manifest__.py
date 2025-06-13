@@ -20,11 +20,11 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base','point_of_sale','web','account','l10n_sa'],
+    'depends': ['base','point_of_sale','web','account','l10n_sa','sale','sale_management','sales_team'],
 
     # always loaded
     'data': [
-        # 'security/ir.model.access.csv',
+        'demo/demo.xml',
         'views/templates.xml',
         'views/views.xml',
     ],
